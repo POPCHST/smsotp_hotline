@@ -67,7 +67,7 @@ export default function SatisfactionClient() {
               onClick={() => setScore(n)}
               style={{
                 ...styles.star,
-                color: n <= (score ?? 0) ? "#fbbf24" : "#e5e7eb",
+                color: n <= (score ?? 0) ? "#fbbf24" : "#0e1016",
                 transform: n === score ? "scale(1.15)" : "scale(1)",
               }}
             >
