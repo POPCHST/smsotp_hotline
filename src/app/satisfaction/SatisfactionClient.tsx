@@ -32,19 +32,14 @@ export default function SatisfactionClient() {
     setMessage("");
 
     try {
-      //   const res = await fetch(
-      //     `${process.env.NEXT_PUBLIC_API}/api/satisfaction`,
-      //     {
-      //       method: "POST",
-      //       headers: { "Content-Type": "application/json" },
-      //       body: JSON.stringify({ token, score, comment }),
-      //     }
-      //   );
-      const res = await fetch(`/api/satisfaction`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token, score, comment }),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API}/api/satisfaction`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token, score, comment }),
+        }
+      );
       console.log(token, score, comment);
       const data = await res.json();
       console.log(data);
