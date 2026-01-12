@@ -33,7 +33,7 @@ export default function SatisfactionClient() {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/satisfaction`,
+        `${process.env.VITE_APP_API}/api/satisfaction`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
