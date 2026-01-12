@@ -32,12 +32,15 @@ export default function SatisfactionClient() {
     setMessage("");
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API}/api/satisfaction`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token, score, comment }),
-      });
-
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API}/api/satisfaction`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token, score, comment }),
+        }
+      );
+      console.log(token, score, comment);
       const data = await res.json();
 
       if (!res.ok) {
@@ -168,7 +171,7 @@ const styles: Record<string, React.CSSProperties> = {
     outline: "none",
     marginBottom: 18,
     background: "#ffffff",
-    color: "#353535"
+    color: "#353535",
   },
 
   button: {
