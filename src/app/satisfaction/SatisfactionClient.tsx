@@ -42,11 +42,12 @@ export default function SatisfactionClient() {
       );
       console.log(token, score, comment);
       const data = await res.json();
-
+      console.log(data);
+      console.log("res", res);
       if (!res.ok) {
         setMessage(data.message || "เกิดข้อผิดพลาด");
       } else {
-        setMessage("🙏 ขอบคุณสำหรับการประเมินของคุณ");
+        setMessage("ขอบคุณสำหรับการประเมินของคุณ");
       }
     } catch {
       setMessage("ไม่สามารถเชื่อมต่อระบบได้");
