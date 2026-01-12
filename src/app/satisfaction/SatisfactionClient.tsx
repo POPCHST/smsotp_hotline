@@ -67,7 +67,7 @@ export default function SatisfactionClient() {
               onClick={() => setScore(n)}
               style={{
                 ...styles.star,
-                color: n <= (score ?? 0) ? "#fbbf24" : "#0e1016",
+                color: n <= (score ?? 0) ? "#fbbf24" : "#f8dcdc",
                 transform: n === score ? "scale(1.15)" : "scale(1)",
               }}
             >
@@ -168,6 +168,7 @@ const styles: Record<string, React.CSSProperties> = {
     outline: "none",
     marginBottom: 18,
     background: "#ffffff",
+    color: "#353535"
   },
 
   button: {
