@@ -40,7 +40,8 @@ export default function SatisfactionClient() {
           body: JSON.stringify({ token, score, comment }),
         }
       );
-      console.log(token, score, comment);
+      // console.log(token, score, comment);
+      
       const data = await res.json();
       console.log(data);
       console.log("res", res);
