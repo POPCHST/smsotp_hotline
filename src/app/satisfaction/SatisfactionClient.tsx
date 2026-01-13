@@ -3,6 +3,8 @@
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
+const API_BASE = process.env.NEXT_PUBLIC_API;
+
 export default function SatisfactionClient() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
@@ -28,29 +30,49 @@ export default function SatisfactionClient() {
       return;
     }
 
+    if (!API_BASE) {
+      setMessage("ระบบยังไม่ได้ตั้งค่า API");
+      return;
+    }
+
     setLoading(true);
     setMessage("");
 
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API}/api/satisfaction`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ token, score, comment }),
-        }
-      );
-      // console.log(token, score, comment);
-      
-      const data = await res.json();
-      console.log(data);
-      console.log("res", res);
-      if (!res.ok) {
-        setMessage(data.message || "เกิดข้อผิดพลาด");
-      } else {
-        setMessage("ขอบคุณสำหรับการประเมินของคุณ");
+      const url = `${API_BASE}/api/satisfaction`;
+      console.log("POST →", url);
+
+      const res = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token,
+          score,
+          comment,
+        }),
+      });
+
+      let data: any = null;
+      const text = await res.text();
+
+      try {
+        data = text ? JSON.parse(text) : null;
+      } catch {
+        data = null;
       }
-    } catch {
+
+      console.log("status:", res.status);
+      console.log("response:", data);
+
+      if (!res.ok) {
+        setMessage(data?.message || "เกิดข้อผิดพลาดจากระบบ");
+      } else {
+        setMessage("ขอบคุณสำหรับการประเมินของคุณ 🙏");
+      }
+    } catch (err) {
+      console.error("NETWORK ERROR:", err);
       setMessage("ไม่สามารถเชื่อมต่อระบบได้");
     } finally {
       setLoading(false);
